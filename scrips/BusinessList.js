@@ -1,10 +1,12 @@
-import { useBusinesses } from "./BusinessProvider.js";
+import { useBusinesses, businessSearchResult } from "./BusinessProvider.js";
 import { Business } from "./Business.js";
 
 const contentTarget = document.querySelector(".business-list")
+const searchResultsTarget = document.querySelector(".companySearchResults")
+const businessesArray = useBusinesses();
 
 export const businessList = () => {
-    const businessesArray = useBusinesses();
+
     contentTarget.innerHTML = "<h1>Active Businesses</h1>"
 
     businessesArray.forEach(
@@ -13,3 +15,10 @@ export const businessList = () => {
         }
     )
 }
+const searchResultTarget = document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
+    if (keyPressEvent.charCode === 13) {
+        const foundBusinessObject = businessSearchResult(keyPressEvent.target.value)
+        searchResultsTarget.innerHTML = Business(foundBusinessObject)
+    }
+})
+

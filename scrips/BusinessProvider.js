@@ -114,3 +114,7 @@ const businesses = [
 export const useBusinesses = () => {
     return businesses.slice();
 }
+
+export const businessSearchResult = (searchRequest) => {
+    return businesses.find(business => business.companyName.includes(searchRequest));
+} 
